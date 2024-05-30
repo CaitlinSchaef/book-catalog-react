@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
+  Router,
+  Routes,
+  Route,
   Outlet,
+  Navigate,
+  Routes
 } from "react-router-dom";
 import { createContext } from 'react'
 import { useState } from 'react'
@@ -15,18 +20,31 @@ import './App.css'
 
 // page imports
 import App from './Pages/App.jsx';
-import AllTasks from './Pages/AllTasks.jsx'
 import ErrorPage from './Pages/ErrorPage.jsx';
-import { initialState, taskReducer } from './Pages/ToDoFunction.jsx';
+import BrowseBooks from './Pages/BrowseBooks.jsx'
+import FavoriteBooks from './Pages/FavoriteBooks.jsx';
+import ToBeRead from './Pages/ToBeRead.jsx';
+import UserProfile from './Pages/UserProfile.jsx';
+import MyNavBar from './NavBar.jsx';
+// import { initialState, taskReducer } from './Pages/ToDoFunction.jsx';
 
 
 const site = import.meta.env.BASE_URL
+
+//going to make a function to make some of the routes be private
+const PrivateRoutes = () => {
+  let auth = {'token': true}
+  return (
+    auth.token ? <Outlet/> : <Navigate to='/'/>
+  )
+}
 
 //this is our layout to install
 // If you want to add a footer, do it after the outlet div with <Footer /> same for navbar
 function Layout() {
   return (
     <div className="d-flex flex-column justify-content-between vh-100">
+      <MyNavBar />
       <div id='page-content'>
         <Outlet />
       </div>
@@ -36,55 +54,73 @@ function Layout() {
 
 // this is our path 
 // outlet is all the stuff in the children path 
-const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/',
-        element: <App />,
-        errorElement: <ErrorPage />
-      },
-      {
-        path: '/alltasks',
-        element: <AllTasks />
-      },
-      // {
-      //   path: '/contact',
-      //   element: <Contact />
-      // },
-      // {
-      //   path: '/portfolio',
-      //   element: <Portfolio />
-      // },
-      // {
-      //   path: '/about',
-      //   element: <About />
-      // },
-    ]
-  }
-], {
-  basename: site
-}
-)
-
-export const TaskContext = createContext()
-
-const TaskProvider = ({children}) => {
-  const [state, dispatch] = useReducer(taskReducer, initialState)
-  console.log("state:", state)
+//going to try a new set up with the private routes:
+function MyRouter() {
   return (
-    <TaskContext.Provider value={{state, dispatch}}>
-      {children}
-    </TaskContext.Provider>
+    <Router>
+      <Layout>
+      <Routes>
+        <Route element={<PrivateRoutes/>}>
+          <Route  path='/userprofile' element={<UserProfile />} errorElement={<ErrorPage />}/>
+          <Route  path='/browsebooks' element={<BrowseBooks />} errorElement={<ErrorPage />}/>
+          <Route  path='/favoritebooks' element={<FavoriteBooks />} errorElement={<ErrorPage />}/>
+          <Route  path='/toberead' element={<ToBeRead />} errorElement={<ErrorPage />}/>
+          <Route />
+        </Route>
+        <Route  path='/' element={<App />} errorElement={<ErrorPage />}/>
+      </Routes>
+      </Layout>
+    </Router>
   )
 }
+// //old way
+// const router = createBrowserRouter([
+//   {
+//     element: <Layout />,
+//     errorElement: <ErrorPage />,
+//     children: [
+//       {
+//         path: '/',
+//         element: <App />,
+//         errorElement: <ErrorPage />
+//       },
+//       {
+//         path: '/userprofile',
+//         element: <UserProfile />
+//       },
+//       {
+//         path: '/browsebooks',
+//         element: <BrowseBooks />
+//       },
+//       {
+//         path: '/favoritebooks',
+//         element: <FavoriteBooks />
+//       },
+//       {
+//         path: '/toberead',
+//         element: <ToBeRead />
+//       },
+//     ]
+//   }
+// ], {
+//   basename: site
+// }
+// )
+
+// export const TaskContext = createContext()
+
+// const TaskProvider = ({children}) => {
+//   const [state, dispatch] = useReducer(taskReducer, initialState)
+//   console.log("state:", state)
+//   return (
+//     <TaskContext.Provider value={{state, dispatch}}>
+//       {children}
+//     </TaskContext.Provider>
+//   )
+// }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <TaskProvider>
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-  </TaskProvider>
+  // <TaskProvider>
+    <RouterProvider router={MyRouter} />
+  // </TaskProvider>
 )

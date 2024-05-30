@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  background-image: url("../src/assets/tealBack.jpg"); 
+  background-image: url("../src/assets/oldbooksgold.jpg"); 
   background-repeat: no-repeat;
   background-position: center center;
   background-color: #f6f4e6;
@@ -27,7 +27,7 @@ body {
  }
 
  .MainBody {
-  background-color: rgba(154, 154, 154, 0.699);
+  background-color: #d9d3c1d1;
   border-radius: 2%;
   color: white;
   /* border-style: solid;
@@ -39,7 +39,19 @@ body {
  }
 
  button {
-  background-color: #148C80;
+  background-color: #401f26;
   color: #f6f4e6;
   border-radius: 4%;
  }
+
+
+/* 
+Colors from book palette:
+#D9D3C1 - light beige
+#735736 - dark tan
+#A6986F - gold
+#142126 - like a black green 
+#401E01 - red brown
+#172626 - deep dark green 
+#2A1F40 - dark purple
+*/
