@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 
-const baseUrl = 'https://book-catalog-back-end.fly.dev/'
+const baseUrl = 'https://book-catalog-back-end.fly.dev'
 
 //make a call to git token
 // auth is in the state, it's going to have access token and setAccesstoken as part of it
@@ -55,5 +55,15 @@ export const createUser = ({ username, password, firstName, lastName }) => {
         console.log('CREATE USER RESPONSE: ', response)
     })
         .catch(error => console.log('ERROR: ', error))
+}
+
+//fetch books 
+export const fetchBooks = () => {
+    axios({
+        method: 'get',
+        url: `${baseUrl}/books`,
+    }).then(response => {
+        console.log('FETCH BOOK RESPONSE: ', response)
+    }).catch(error => console.log('ERROR: ', error))
 }
 
