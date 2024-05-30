@@ -1,14 +1,12 @@
 import './NavBarStyle.css'
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavbarCollapse from 'react-bootstrap/NavbarCollapse'
 
 
 function MyNavBar() {
-  let location = useLocation();
-  console.log('location:', location.pathname)
   return (
       <>
     <Navbar className="">

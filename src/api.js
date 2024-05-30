@@ -1,10 +1,8 @@
-//we need axios available to using, so we need to isntall it
 
 import axios from 'axios'
 
 
 const baseUrl = 'http://127.0.0.1:8000'
-
 
 //make a call to git token
 // auth is in the state, it's going to have access token and setAccesstoken as part of it

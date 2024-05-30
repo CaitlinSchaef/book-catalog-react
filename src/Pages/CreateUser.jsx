@@ -4,6 +4,7 @@ import ThemeProvider from 'react-bootstrap/ThemeProvider'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { createUser } from "../api"
 
 
 
@@ -64,7 +65,7 @@ const Body = () => {
                 <Link to ='/'>
                 <button>Log In</button>
                 </Link>
-                
+
             </div>
           </Col>
         </Row>

@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import ThemeProvider from 'react-bootstrap/ThemeProvider'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-
-
+import { createUser, getToken } from "../api"
+import { AuthContext } from '../authContext'
 
 const Body = () => {
   const { auth } = useContext(AuthContext)
