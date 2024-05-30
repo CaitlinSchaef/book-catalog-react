@@ -42,13 +42,16 @@ const PrivateRoutes = () => {
 }
 
 
-const ProtectedRoute = ({component}) => {
-  return (
-    {component}
-  ) 
+const Protected = ({component}) => {
+  const { auth } = useContext(AuthContext)
+  return auth?.accessToken ? (
+    <>
+      {component}
+    </>
+  ) : (
+    <Navigate to="/" replace={true} />
+  )
 }
-
-
 
 //this is our layout to install
 // If you want to add a footer, do it after the outlet div with <Footer /> same for navbar
@@ -63,9 +66,6 @@ function Layout() {
   )
 }
 
-
-// const router = MyRouter()
-// //old way
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -73,8 +73,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <App />,
-        errorElement: <ErrorPage />
+        element: <App />
       },
       {
         path: '/createuser',
@@ -82,26 +81,25 @@ const router = createBrowserRouter([
       },
       {
         path: '/userprofile',
-        element: <UserProfile />
+        element: <Protected component={<UserProfile />} />
       },
       {
         path: '/browsebooks',
-        element: <BrowseBooks />
+        element: <Protected component={<BrowseBooks />} />
       },
       {
         path: '/favoritebooks',
-        element: <FavoriteBooks />
+        element: <Protected component={<FavoriteBooks />} />
       },
       {
         path: '/toberead',
-        element: <ToBeRead />
+        element: <Protected component={<ToBeRead />} />
       },
     ]
   }
 ], {
   basename: site
-}
-)
+})
 
 
 // basically we're creating values that we're going to track and update, and then we need to wrap that whole thing around the app

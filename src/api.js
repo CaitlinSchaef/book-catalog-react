@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 
-const baseUrl = 'http://127.0.0.1:8000'
+const baseUrl = 'https://book-catalog-back-end.fly.dev/'
 
 //make a call to git token
 // auth is in the state, it's going to have access token and setAccesstoken as part of it
