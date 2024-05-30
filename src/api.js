@@ -7,7 +7,7 @@ const baseUrl = 'http://127.0.0.1:8000'
 
 
 //make a call to git token
-// auth is in the state, it's going to have access token and setAccesstoken as partt of it
+// auth is in the state, it's going to have access token and setAccesstoken as part of it
 export const getToken = ({ auth, username, password }) => {
     axios.post(`${baseUrl}/token/`, {
         // then we're going to pass it the username and the password
@@ -17,6 +17,10 @@ export const getToken = ({ auth, username, password }) => {
         console.log('GET TOKEN RESPONSE: ', response)
         auth.setAccessToken(response.data.access)
         // set local storage here, then call it with a use effect
+        //Store the access token
+        localStorage.setItem("token", accessToken)
+        //Load the access token, maybe move this around?
+        let accessToken = localStorage.getItem("token")
     })
     .catch(error => console.log('ERROR: ', error))
 }

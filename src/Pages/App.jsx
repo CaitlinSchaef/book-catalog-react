@@ -4,12 +4,18 @@ import ThemeProvider from 'react-bootstrap/ThemeProvider'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-// import { TaskContext } from "./main"
-// import { useContext } from "react"
 
-// make a body const
+
 
 const Body = () => {
+  const { auth } = useContext(AuthContext)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const submit = () => {
+    getToken({ auth, username, password })
+  }
+
   return (
     <ThemeProvider
     breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs']}
@@ -23,19 +29,24 @@ const Body = () => {
               <div>
               <div>Username:</div>
               <input 
-                // onChange={(e) => setUsername(e.target.value)}
-                // value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
               />
               </div>
               <div>
                 <div>Password:</div>
                 <input 
-                  // onChange={(e) => setPassword(e.target.value)}
-                  // value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                 />
               </div>
+              <div style={{ marginTop: 20 }}>
+                <button onClick={() => submit()}>Submit</button>
+              </div>
              <br />
+                <Link to ='/CreateUser'>
                 <button>New User? Create Account</button>
+                </Link>
             </div>
           </Col>
         </Row>

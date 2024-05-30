@@ -8,7 +8,6 @@ import {
   Route,
   Outlet,
   Navigate,
-  Routes
 } from "react-router-dom";
 import { createContext } from 'react'
 import { useState } from 'react'
@@ -26,7 +25,10 @@ import FavoriteBooks from './Pages/FavoriteBooks.jsx';
 import ToBeRead from './Pages/ToBeRead.jsx';
 import UserProfile from './Pages/UserProfile.jsx';
 import MyNavBar from './NavBar.jsx';
+import CreateUser from './Pages/CreateUser.jsx';
 // import { initialState, taskReducer } from './Pages/ToDoFunction.jsx';
+
+import { AuthContext } from './authContext'
 
 
 const site = import.meta.env.BASE_URL
@@ -68,11 +70,14 @@ function MyRouter() {
           <Route />
         </Route>
         <Route  path='/' element={<App />} errorElement={<ErrorPage />}/>
+        <Route  path='/createuser' element={<CreateUser />} errorElement={<ErrorPage />}/>
       </Routes>
       </Layout>
     </Router>
   )
 }
+
+const router = MyRouter()
 // //old way
 // const router = createBrowserRouter([
 //   {
@@ -119,8 +124,24 @@ function MyRouter() {
 //   )
 // }
 
+// basically we're creating values that we're going to track and update, and then we need to wrap that whole thing around the app
+const AuthContextProvider = ({ children }) => {
+  const [accessToken, setAccessToken] = useState()
+
+  const auth = {
+    accessToken,
+    setAccessToken
+  }
+
+  return (
+    <AuthContext.Provider value={{ auth }} >
+      {children}
+      </AuthContext.Provider>
+  )
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <TaskProvider>
-    <RouterProvider router={MyRouter} />
-  // </TaskProvider>
+  <AuthContextProvider>
+   <RouterProvider router={router} />
+  </AuthContextProvider>
 )
