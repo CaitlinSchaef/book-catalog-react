@@ -2,7 +2,8 @@
 import axios from 'axios'
 
 
-const baseUrl = 'https://book-catalog-back-end.fly.dev'
+// const baseUrl = 'https://book-catalog-back-end.fly.dev'
+const baseUrl = 'http://127.0.0.1:8000'
 
 //make a call to git token
 // auth is in the state, it's going to have access token and setAccesstoken as part of it
@@ -14,11 +15,13 @@ export const getToken = ({ auth, username, password }) => {
     }).then(response => {
         console.log('GET TOKEN RESPONSE: ', response)
         auth.setAccessToken(response.data.access)
+        let accessToken = response.data.access
         // set local storage here, then call it with a use effect
         //Store the access token
         localStorage.setItem("token", accessToken)
+        console.log('ACCESS TOKEN: ', accessToken)
         //Load the access token, maybe move this around?
-        let accessToken = localStorage.getItem("token")
+        localStorage.getItem("token")
     })
     .catch(error => console.log('ERROR: ', error))
 }
