@@ -34,12 +34,12 @@ import { AuthContext } from './authContext.js'
 const site = import.meta.env.BASE_URL
 
 //going to make a function to make some of the routes be private
-const PrivateRoutes = () => {
-  let auth = {'token': true}
-  return (
-    auth.token ? <Outlet/> : <Navigate to='/'/>
-  )
-}
+// const PrivateRoutes = () => {
+//   let auth = {'token': true}
+//   return (
+//     auth.token ? <Outlet/> : <Navigate to='/'/>
+//   )
+// }
 
 
 const Protected = ({component}) => {
