@@ -46,7 +46,7 @@ export const fetchUser = ({ auth }) => {
 export const createUser = ({ username, password, firstName, lastName }) => {
     axios({
         method: 'post',
-        url: `${baseUrl}/create_user`,
+        url: `${baseUrl}/create_user/`,
         data: {
             username, 
             password,

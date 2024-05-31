@@ -41,7 +41,9 @@ const Body = () => {
                 />
               </div>
               <div style={{ marginTop: 20 }}>
+                <Link to ='/userprofile'>
                 <button onClick={() => submit()}>Submit</button>
+                </Link>
               </div>
              <br />
                 <Link to ='/CreateUser'>

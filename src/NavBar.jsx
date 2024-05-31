@@ -7,6 +7,11 @@ import NavbarCollapse from 'react-bootstrap/NavbarCollapse'
 
 
 function MyNavBar() {
+  const logOut = () => {
+    localStorage.clear("token")
+    console.log('LOGGED OUT: SUCCESS')
+  }
+
   return (
       <>
     <Navbar className="">
@@ -23,6 +28,10 @@ function MyNavBar() {
         
         <Navbar.Text className="nav-link me-2">
         <Link className="nav-link" to='/browsebooks'>Browse Books</Link> 
+        </Navbar.Text>
+
+        <Navbar.Text className="nav-out me-2">
+          <button onClick={() => logOut()}>Log Out</button>
         </Navbar.Text>
 
       </Navbar.Collapse>
